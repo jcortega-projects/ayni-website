@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayni — Meaningful Reciprocity</title>
+<meta name="description" content="Ayni is a community for sharing stories, lessons, and ideas that help each other grow. A podcast of real conversations with researchers, founders, and scholars.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --navy-deep: #131F38;
+    --gold: #C8943E;
+    --gold-light: #D9AB5C;
+    --cream: #F5F0E8;
+    --cream-dim: #E8E0D2;
+    --ink: #2A2A2A;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-accent: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Jost', -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 2.5rem;
+    background: rgba(27, 42, 74, 0);
+    transition: background 0.4s ease, padding 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(27, 42, 74, 0.96);
+    padding: 0.9rem 2.5rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+  }
+  nav .brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  nav .nav-links {
+    display: flex;
+    gap: 2.2rem;
+    list-style: none;
+  }
+  nav .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+    opacity: 0.85;
+    transition: opacity 0.25s, color 0.25s;
+  }
+  nav .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
+  .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--cream); margin: 5px 0; transition: 0.3s; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 1.5rem 4rem;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(200,148,62,0.12), transparent 60%),
+      linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: var(--cream);
+    overflow: hidden;
+  }
+  /* subtle woven texture lines */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(245,240,232,0.015) 0 2px, transparent 2px 22px);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 7vw, 5.4rem);
+    line-height: 1.05;
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.35s forwards;
+  }
+  .hero h1 .accent { color: var(--gold); font-style: italic; }
+  .hero .tagline {
+    font-family: var(--font-accent);
+    font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+    font-style: italic;
+    letter-spacing: 0.04em;
+    color: var(--cream-dim);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.5s forwards;
+  }
+  .hero .lede {
+    max-width: 560px;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.82);
+    opacity: 0;
+    animation: fadeUp 0.9s ease 0.65s forwards;
+  }
+  .hero .scroll-cue {
+    position: absolute;
+    bottom: 2.2rem; left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.9s ease 1s forwards, bob 2.4s ease-in-out 1.6s infinite;
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px);} to {opacity: 1; transform: translateY(0);} }
+  @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(8px);} }
+
+  /* ---------- SECTION SHARED ---------- */
+  section { position: relative; }
+  .section-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    text-align: center;
+    color: var(--navy);
+    margin-bottom: 3rem;
+    line-height: 1.15;
+  }
+
+  /* ---------- VIDEO ---------- */
+  .video-section {
+    background: var(--cream);
+    padding: 6rem 1.5rem;
+  }
+  .video-wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(27,42,74,0.22);
+    border: 1px solid rgba(200,148,62,0.25);
+  }
+  .video-aspect {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: var(--navy);
+  }
+  .video-aspect iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about {
+    background: linear-gradient(170deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: var(--cream);
+    padding: 6.5rem 1.5rem;
+  }
+  .about-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .about-photo {
+    aspect-ratio: 4/5;
+    border-radius: 6px;
+    background: var(--navy-deep) center/cover no-repeat;
+    /* Replace url below with your photo */
+    background-image: linear-gradient(135deg, rgba(200,148,62,0.25), rgba(27,42,74,0.6)), url('photos/juan.jpg');
+    border: 1px solid rgba(200,148,62,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .about-text .section-label { text-align: left; }
+  .about-text h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: 1.4rem;
+    color: var(--cream);
+  }
+  .about-text p {
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.85);
+    margin-bottom: 1.1rem;
+  }
+  .about-text .signature {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    margin-top: 1.4rem;
+  }
+
+  /* ---------- CAROUSEL ---------- */
+  .gallery {
+    background: var(--cream);
+    padding: 6rem 0;
+    overflow: hidden;
+  }
+  .gallery .section-label, .gallery .section-title { padding: 0 1.5rem; }
+  .carousel-track {
+    display: flex;
+    gap: 1.2rem;
+    width: max-content;
+    animation: scroll-x 45s linear infinite;
+  }
+  .carousel:hover .carousel-track { animation-play-state: paused; }
+  .carousel-item {
+    width: 360px;
+    height: 240px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    background: var(--navy) center/cover no-repeat;
+    box-shadow: 0 12px 35px rgba(27,42,74,0.15);
+    border: 1px solid rgba(200,148,62,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .carousel-item span {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.4rem 1rem 0.8rem;
+    background: linear-gradient(transparent, rgba(19,31,56,0.85));
+    color: var(--cream);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  @keyframes scroll-x {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- GUESTS / EPISODES ---------- */
+  .episodes {
+    background: var(--cream);
+    padding: 6rem 1.5rem 7rem;
+  }
+  .episode {
+    max-width: 1040px;
+    margin: 0 auto 4.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .episode:last-child { margin-bottom: 0; }
+  .episode.reverse .ep-photo { order: 2; }
+  .episode.reverse .ep-text { order: 1; }
+
+  .ep-photo {
+    aspect-ratio: 1/1;
+    border-radius: 6px;
+    background: var(--navy) center/cover no-repeat;
+    border: 1px solid rgba(200,148,62,0.3);
+    box-shadow: 0 18px 50px rgba(27,42,74,0.18);
+    position: relative;
+  }
+  .ep-status {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+  }
+  .ep-status.upcoming {
+    background: rgba(27,42,74,0.85);
+    color: var(--gold-light);
+    border: 1px solid var(--gold);
+  }
+  .ep-country {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+  .ep-text h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+  }
+  .ep-text .ep-guest {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 1.2rem;
+  }
+  .ep-text p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #4a4a4a;
+    margin-bottom: 1.6rem;
+  }
+  .ep-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.85rem 1.6rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+  }
+  .btn-watch {
+    background: var(--gold);
+    color: var(--navy-deep);
+  }
+  .btn-watch:hover { background: var(--navy); color: var(--cream); transform: translateY(-2px); }
+  .btn-disabled {
+    background: transparent;
+    color: #999;
+    border: 1px solid #ccc;
+    cursor: default;
+  }
+  .ep-linkedin {
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.25s;
+  }
+  .ep-linkedin:hover { color: var(--gold); }
+
+  /* ---------- SOCIAL / FOOTER ---------- */
+  footer {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: var(--cream);
+    padding: 5rem 1.5rem 2.5rem;
+    text-align: center;
+  }
+  footer .foot-brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: 0.3em;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  footer .foot-tag {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    margin-bottom: 2.5rem;
+  }
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,148,62,0.5);
+    color: var(--cream);
+    transition: all 0.3s ease;
+  }
+  .socials a:hover {
+    background: var(--gold);
+    color: var(--navy-deep);
+    transform: translateY(-3px);
+  }
+  .socials svg { width: 20px; height: 20px; fill: currentColor; }
+  footer .foot-email {
+    color: var(--cream-dim);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s;
+  }
+  footer .foot-email:hover { border-color: var(--gold); }
+  footer .foot-divider {
+    width: 60px; height: 1px;
+    background: rgba(200,148,62,0.4);
+    margin: 2rem auto;
+  }
+  footer .copyright {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.5);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 820px) {
+    nav { padding: 1.1rem 1.5rem; }
+    nav .nav-links {
+      position: fixed;
+      top: 0; right: -100%;
+      flex-direction: column;
+      background: var(--navy-deep);
+      height: 100vh;
+      width: 70%;
+      padding: 6rem 2rem;
+      gap: 1.8rem;
+      transition: right 0.4s ease;
+    }
+    nav .nav-links.open { right: 0; }
+    .nav-toggle { display: block; z-index: 101; }
+
+    .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-photo { max-width: 360px; margin: 0 auto; width: 100%; }
+
+    .episode, .episode.reverse {
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+    .episode.reverse .ep-photo { order: 0; }
+    .episode.reverse .ep-text { order: 0; }
+    .ep-photo { max-width: 420px; margin: 0 auto; width: 100%; }
+
+    .carousel-item { width: 280px; height: 190px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav id="nav">
+  <a href="#home" class="brand">AYNI</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#video">The Idea</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#episodes">People</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="home">
+  <p class="hero-eyebrow">Meaningful Reciprocity</p>
+  <h1>Welcome to the<br><span class="accent">Ayni</span> Community</h1>
+  <p class="tagline">Today for you, tomorrow for me</p>
+  <p class="lede">We believe in the power of sharing and helping each other grow — a space for stories, lessons, and ideas that move in cycles through community.</p>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<!-- ============ VIDEO ============ -->
+<section class="video-section" id="video">
+  <p class="section-label">Watch</p>
+  <h2 class="section-title">What is Ayni?</h2>
+  <div class="video-wrap">
+    <div class="video-aspect">
+      <!-- Replace VIDEO_ID with your YouTube ID (currently set to your promo video) -->
+      <iframe src="https://www.youtube.com/embed/agvfwcumAzo" title="Ayni — Introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-photo"></div>
+    <div class="about-text">
+      <p class="section-label">The Host</p>
+      <h2>Hi, I'm Juan Ortega</h2>
+      <p>I'm an Ecuadorian Fulbright scholar and a graduate student in Artificial Intelligence and Robotics at Carnegie Mellon University. My work sits at the intersection of technology and human connection — I research how machines can offer emotional support without making us less human.</p>
+      <p>Ayni was born from a simple belief: that the stories, lessons, and wisdom people carry are too valuable to disappear. I started this as a space to capture real conversations with people building, learning, and leading around the world.</p>
+      <p class="signature">Technology should become more human, not the other way around.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY / CAROUSEL ============ -->
+<section class="gallery" id="gallery">
+  <p class="section-label">Moments</p>
+  <h2 class="section-title">Along the Way</h2>
+  <div class="carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- Photos duplicated in JS for seamless loop. Replace background-image paths with your photos. -->
+      <div class="carousel-item" style="background-image:url('photos/g1.jpg')"><span>Fulbright Seminar — Houston</span></div>
+      <div class="carousel-item" style="background-image:url('photos/g2.jpg')"><span>Race to the Moon — NASA</span></div>
+      <div class="carousel-item" style="background-image:url('photos/g3.jpg')"><span>Recording Episode 1</span></div>
+      <div class="carousel-item" style="background-image:url('photos/g4.jpg')"><span>Fellow Fulbrighters</span></div>
+      <div class="carousel-item" style="background-image:url('photos/g5.jpg')"><span>Conversations</span></div>
+      <div class="carousel-item" style="background-image:url('photos/g6.jpg')"><span>Behind the Scenes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EPISODES / PEOPLE ============ -->
+<section class="episodes" id="episodes">
+  <p class="section-label">The People</p>
+  <h2 class="section-title">Conversations</h2>
+
+  <!-- EPISODE 1 — Binetou (LIVE) -->
+  <div class="episode">
+    <div class="ep-photo" style="background-image:url('photos/binetou.jpg')">
+      <span class="ep-status">Episode 1 · Live</span>
+    </div>
+    <div class="ep-text">
+      <p class="ep-country">Senegal</p>
+      <h3>From Fulbright to the United Nations</h3>
+      <p class="ep-guest">Binetou Sylla</p>
+      <p>Binetou applied to Fulbright not knowing where it would take her. It led her to Lehigh University, and eventually to representing her school at the UN General Assembly. A conversation about taking the leap and what becomes possible when you do.</p>
+      <div class="ep-actions">
+        <a href="https://youtu.be/agvfwcumAzo" target="_blank" class="btn btn-watch">Watch Episode</a>
+        <a href="#" target="_blank" class="ep-linkedin">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EPISODE 2 — Sekatle (UPCOMING) -->
+  <div class="episode reverse">
+    <div class="ep-photo" style="background-image:url('photos/sekatle.jpg')">
+      <span class="ep-status upcoming">Airs June 6th</span>
+    </div>
+    <div class="ep-text">
+      <p class="ep-country">Lesotho</p>
+      <h3>Authenticity & Water Diplomacy</h3>
+      <p class="ep-guest">Sekatle Sekatle</p>
+      <p>A conversation about staying true to yourself, the path into water diplomacy, and what it takes to apply for Fulbright from a place few people expect.</p>
+      <div class="ep-actions">
+        <span class="btn btn-disabled">Coming Soon</span>
+        <a href="#" target="_blank" class="ep-linkedin">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EPISODE 3 — Ben (UPCOMING) -->
+  <div class="episode">
+    <div class="ep-photo" style="background-image:url('photos/ben.jpg')">
+      <span class="ep-status upcoming">Airs June 10th</span>
+    </div>
+    <div class="ep-text">
+      <p class="ep-country">Israel</p>
+      <h3>Adaptation, Culture & Creativity</h3>
+      <p class="ep-guest">Ben Molina</p>
+      <p>On adapting to a new country, navigating culture shock, and the place of AI in the arts — a conversation about reinvention and finding your footing.</p>
+      <div class="ep-actions">
+        <span class="btn btn-disabled">Coming Soon</span>
+        <a href="#" target="_blank" class="ep-linkedin">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ FOOTER / CONNECT ============ -->
+<footer id="connect">
+  <div class="foot-brand">AYNI</div>
+  <p class="foot-tag">Meaningful Reciprocity</p>
+
+  <div class="socials">
+    <!-- Instagram -->
+    <a href="https://instagram.com/ayni.global" target="_blank" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14c-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.94 19.86.63c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zM12 16a4 4 0 110-8 4 4 0 010 8zm6.41-10.85a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z"/></svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://tiktok.com/@ayni.global" target="_blank" aria-label="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.3 0 .6.05.88.13V9.4a6.33 6.33 0 00-1-.05A6.34 6.34 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.04-.1z"/></svg>
+    </a>
+    <!-- YouTube -->
+    <a href="https://youtube.com/@ayni.global" target="_blank" aria-label="YouTube">
+      <svg viewBox="0 0 24 24"><path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 00.5 6.2C0 8.07 0 12 0 12s0 3.93.5 5.8a3.02 3.02 0 002.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 002.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+    </a>
+    <!-- LinkedIn -->
+    <a href="https://linkedin.com/company/ayni-official" target="_blank" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+    </a>
+  </div>
+
+  <a href="mailto:ayni.socialmedia@gmail.com" class="foot-email">ayni.socialmedia@gmail.com</a>
+
+  <div class="foot-divider"></div>
+  <p class="copyright">© 2026 Ayni. All rights reserved.</p>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // Duplicate carousel items for seamless infinite loop
+  const track = document.getElementById('carouselTrack');
+  track.innerHTML += track.innerHTML;
+</script>
+
+</body>
+</html>
