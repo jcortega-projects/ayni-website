@@ -36,30 +36,31 @@
 <!-- ============ NAV ============ -->
 <nav id="nav">
   <a href="#home" class="brand">AYNI</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#video" data-i18n="nav-idea">The Idea</a></li>
+    <li><a href="#about" data-i18n="nav-about">About</a></li>
+    <li><a href="#episodes" data-i18n="nav-people">People</a></li>
+    <li><a href="#connect" data-i18n="nav-connect">Connect</a></li>
+  </ul>
+  <button class="lang-toggle" id="langToggle" aria-label="Cambiar a español">ESP</button>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#video">The Idea</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#episodes">People</a></li>
-    <li><a href="#connect">Connect</a></li>
-  </ul>
 </nav>
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="home">
-  <p class="hero-eyebrow">Meaningful Reciprocity</p>
-  <h1>Welcome to the<br><span class="accent">Ayni</span> Community</h1>
+  <p class="hero-eyebrow" data-i18n="hero-eyebrow">Meaningful Reciprocity</p>
+  <h1 data-i18n-html="hero-heading">Welcome to the<br><span class="accent">Ayni</span> Community</h1>
 
-  <p class="lede">We believe in the power of sharing and helping each other grow — a space for stories, lessons, and ideas that move in cycles through community.</p>
-  <div class="scroll-cue">Scroll</div>
-</header> 
+  <p class="lede" data-i18n="hero-lede">We believe in the power of sharing and helping each other grow — a space for stories, lessons, and ideas that move in cycles through community.</p>
+  <div class="scroll-cue" data-i18n="hero-scroll">Scroll</div>
+</header>
 
 <!-- ============ VIDEO ============ -->
 <section class="video-section" id="video">
-  <p class="section-label">Watch</p>
-  <h2 class="section-title">What is Ayni?</h2>
+  <p class="section-label" data-i18n="video-label">Watch</p>
+  <h2 class="section-title" data-i18n="video-title">What is Ayni?</h2>
   <div class="video-wrap">
     <div class="video-aspect">
       <iframe src="https://www.youtube.com/embed/agvfwcumAzo" title="Ayni — Introduction" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
@@ -72,11 +73,11 @@
   <div class="about-inner">
     <div class="about-photo" role="img" aria-label="Juan Ortega — host of Ayni, Ecuadorian Fulbright scholar at Carnegie Mellon University"></div>
     <div class="about-text">
-      <p class="section-label">The Host</p>
-      <h2>Hi, I'm Juan Ortega</h2>
-      <p>I'm an Ecuadorian Fulbright scholar and a graduate student in Artificial Intelligence and Robotics at Carnegie Mellon University. My work sits at the intersection of technology and human connection — I research how machines can offer emotional support without making us less human.</p>
-      <p>Ayni was born from a simple belief: that the stories, lessons, and wisdom people carry are too valuable to disappear. I started this as a space to capture real conversations with people building, learning, and leading around the world.</p>
-      <p class="signature">Technology should become more human, not the other way around.</p>
+      <p class="section-label" data-i18n="about-label">The Host</p>
+      <h2 data-i18n="about-heading">Hi, I'm Juan Ortega</h2>
+      <p data-i18n="about-p1">I'm an Ecuadorian Fulbright scholar and a graduate student in Artificial Intelligence and Robotics at Carnegie Mellon University. My work sits at the intersection of technology and human connection — I research how machines can offer emotional support without making us less human.</p>
+      <p data-i18n="about-p2">Ayni was born from a simple belief: that the stories, lessons, and wisdom people carry are too valuable to disappear. I started this as a space to capture real conversations with people building, learning, and leading around the world.</p>
+      <p class="signature" data-i18n="about-signature">Technology should become more human, not the other way around.</p>
     </div>
   </div>
 </section>
@@ -85,16 +86,16 @@
 <!-- To add a new carousel photo: add a new <div class="carousel-item"> inside the carousel-track.
      The JS automatically duplicates all items for seamless looping. -->
 <section class="gallery" id="gallery">
-  <p class="section-label">Moments</p>
-  <h2 class="section-title">Along the Way</h2>
+  <p class="section-label" data-i18n="gallery-label">Moments</p>
+  <h2 class="section-title" data-i18n="gallery-title">Along the Way</h2>
   <div class="carousel">
     <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-item" style="background-image:url('photos/gallery/g1.jpg')"><span>Fulbright Seminar — Houston</span></div>
-      <div class="carousel-item" style="background-image:url('photos/gallery/g2.jpg')"><span>Race to the Moon — NASA</span></div>
-      <div class="carousel-item" style="background-image:url('photos/gallery/g3.jpg')"><span>Fulbright LATAM</span></div>
-      <div class="carousel-item" style="background-image:url('photos/gallery/g4.jpg')"><span>Fellow Fulbrighters</span></div>
-      <div class="carousel-item" style="background-image:url('photos/gallery/g5.jpg')"><span>Fulbright Ecuador</span></div>
-      <div class="carousel-item" style="background-image:url('photos/gallery/g6.jpg')"><span>Fulbright Session</span></div>
+      <div class="carousel-item" style="background-image:url('photos/gallery/g1.jpg')"><span data-i18n="carousel-g1">Fulbright Seminar — Houston</span></div>
+      <div class="carousel-item" style="background-image:url('photos/gallery/g2.jpg')"><span data-i18n="carousel-g2">Race to the Moon — NASA</span></div>
+      <div class="carousel-item" style="background-image:url('photos/gallery/g3.jpg')"><span data-i18n="carousel-g3">Fulbright LATAM</span></div>
+      <div class="carousel-item" style="background-image:url('photos/gallery/g4.jpg')"><span data-i18n="carousel-g4">Fellow Fulbrighters</span></div>
+      <div class="carousel-item" style="background-image:url('photos/gallery/g5.jpg')"><span data-i18n="carousel-g5">Fulbright Ecuador</span></div>
+      <div class="carousel-item" style="background-image:url('photos/gallery/g6.jpg')"><span data-i18n="carousel-g6">Fulbright Session</span></div>
     </div>
   </div>
 </section>
@@ -106,24 +107,25 @@
   2. Alternate the class between "episode" and "episode reverse" (so photos zigzag left/right)
   3. Update: guest photo path, status badge, country, title, guest name, description, and links
   4. Place the guest photo in photos/guests/
+  5. Add both English and Spanish translations in js/main.js under the translations object
 -->
 <section class="episodes" id="episodes">
-  <p class="section-label">The People</p>
-  <h2 class="section-title">Conversations</h2>
+  <p class="section-label" data-i18n="episodes-label">The People</p>
+  <h2 class="section-title" data-i18n="episodes-title">Conversations</h2>
 
   <!-- ====== EPISODE 1 — BINETOU SYLLA ====== -->
   <!-- To add a new episode: copy this block, update the fields, and alternate the class between "episode" and "episode reverse" -->
   <div class="episode">
     <div class="ep-photo" style="background-image:url('photos/guests/binetou.jpg')" role="img" aria-label="Binetou Sylla — Fulbright scholar from Senegal">
-      <span class="ep-status">Episode 1 · Live</span>
+      <span class="ep-status" data-i18n="ep1-status">Episode 1 · Live</span>
     </div>
     <div class="ep-text">
       <p class="ep-country">Senegal</p>
-      <h3>From Fulbright to the United Nations</h3>
+      <h3 data-i18n="ep1-title">From Fulbright to the United Nations</h3>
       <p class="ep-guest">Binetou Sylla</p>
-      <p>Binetou applied to Fulbright not knowing where it would take her. It led her to Lehigh University, and eventually to representing her school at the UN General Assembly. A conversation about taking the leap and what becomes possible when you do.</p>
+      <p data-i18n="ep1-desc">Binetou applied to Fulbright not knowing where it would take her. It led her to Lehigh University, and eventually to representing her school at the UN General Assembly. A conversation about taking the leap and what becomes possible when you do.</p>
       <div class="ep-actions">
-        <a href="https://youtu.be/dQG7JDL8MKc" target="_blank" class="btn btn-watch">Watch Episode</a>
+        <a href="https://youtu.be/dQG7JDL8MKc" target="_blank" class="btn btn-watch" data-i18n="ep1-watch">Watch Episode</a>
         <a href="https://www.linkedin.com/in/binetou-sylla" target="_blank" class="ep-linkedin">LinkedIn</a>
       </div>
     </div>
@@ -132,15 +134,15 @@
   <!-- ====== EPISODE 2 — SEKATLE SEKATLE ====== -->
   <div class="episode reverse">
     <div class="ep-photo" style="background-image:url('photos/guests/sekatle.jpg')" role="img" aria-label="Sekatle Sekatle — water diplomacy scholar from Lesotho">
-      <span class="ep-status upcoming">Airs June 3rd</span>
+      <span class="ep-status upcoming" data-i18n="ep2-status">Airs June 3rd</span>
     </div>
     <div class="ep-text">
       <p class="ep-country">Lesotho</p>
-      <h3>Authenticity & Water Diplomacy</h3>
+      <h3 data-i18n="ep2-title">Authenticity & Water Diplomacy</h3>
       <p class="ep-guest">Sekatle Sekatle</p>
-      <p>A conversation about staying true to yourself, the path into water diplomacy, and what it takes to apply for Fulbright from a place few people expect.</p>
+      <p data-i18n="ep2-desc">A conversation about staying true to yourself, the path into water diplomacy, and what it takes to apply for Fulbright from a place few people expect.</p>
       <div class="ep-actions">
-        <span class="btn btn-disabled">Coming Soon</span>
+        <span class="btn btn-disabled" data-i18n="ep2-soon">Coming Soon</span>
         <a href="https://www.linkedin.com/in/sekatle-sekatle-426a0317/" target="_blank" class="ep-linkedin">LinkedIn</a>
       </div>
     </div>
@@ -149,15 +151,15 @@
   <!-- ====== EPISODE 3 — NINO GODORADZE ====== -->
   <div class="episode">
     <div class="ep-photo" style="background-image:url('photos/guests/nino.jpg')" role="img" aria-label="Nino Godoradze — change, Risk & Starting Ove, from Georgia">
-      <span class="ep-status upcoming">Airs June 6th</span>
+      <span class="ep-status upcoming" data-i18n="ep3-status">Airs June 6th</span>
     </div>
     <div class="ep-text">
       <p class="ep-country">Georgia</p>
-      <h3>Change, Risk & Starting Over</h3>
+      <h3 data-i18n="ep3-title">Change, Risk & Starting Over</h3>
       <p class="ep-guest">Nino Godoradze</p>
-      <p> A conversation about going from psychology to economics to healthcare data science, why change will always be scary, and how starting over in a new field can be the best decision you make.</p>
+      <p data-i18n="ep3-desc"> A conversation about going from psychology to economics to healthcare data science, why change will always be scary, and how starting over in a new field can be the best decision you make.</p>
       <div class="ep-actions">
-        <span class="btn btn-disabled">Coming Soon</span>
+        <span class="btn btn-disabled" data-i18n="ep3-soon">Coming Soon</span>
         <a href="https://www.linkedin.com/in/nino-godoradze/" target="_blank" class="ep-linkedin">LinkedIn</a>
       </div>
     </div>
@@ -166,15 +168,15 @@
   <!-- ====== EPISODE 4 — ARCENIA BELO ====== -->
   <div class="episode reverse">
     <div class="ep-photo" style="background-image:url('photos/guests/arcenia.jpg')" role="img" aria-label="Arcenia Belo — water diplomacy scholar from Lesotho">
-      <span class="ep-status upcoming">Airs June 10th</span>
+      <span class="ep-status upcoming" data-i18n="ep4-status">Airs June 10th</span>
     </div>
     <div class="ep-text">
       <p class="ep-country">Timor-Leste</p>
-      <h3>Aviation & Building a Nation</h3>
+      <h3 data-i18n="ep4-title">Aviation & Building a Nation</h3>
       <p class="ep-guest">Arcenia Belo</p>
-      <p>A conversation about growing up watching planes land in a small town in Timor Leste, becoming an air traffic controller, and what it means to build an aviation career in one of the youngest nations in the world.</p>
+      <p data-i18n="ep4-desc">A conversation about growing up watching planes land in a small town in Timor Leste, becoming an air traffic controller, and what it means to build an aviation career in one of the youngest nations in the world.</p>
       <div class="ep-actions">
-        <span class="btn btn-disabled">Coming Soon</span>
+        <span class="btn btn-disabled" data-i18n="ep4-soon">Coming Soon</span>
         <a href="https://www.linkedin.com/in/arcenia-belo-4690b5317/" target="_blank" class="ep-linkedin">LinkedIn</a>
       </div>
     </div>
@@ -185,7 +187,7 @@
 <!-- ============ FOOTER / CONNECT ============ -->
 <footer id="connect">
   <div class="foot-brand">AYNI</div>
-  <p class="foot-tag">Meaningful Reciprocity</p>
+  <p class="foot-tag" data-i18n="foot-tag">Meaningful Reciprocity</p>
 
   <div class="socials">
     <!-- Instagram -->
@@ -209,7 +211,7 @@
   <a href="mailto:ayni.socialmedia@gmail.com" class="foot-email">ayni.socialmedia@gmail.com</a>
 
   <div class="foot-divider"></div>
-  <p class="copyright">&copy; 2026 Ayni. All rights reserved.</p>
+  <p class="copyright" data-i18n="foot-copyright">&copy; 2026 Ayni. All rights reserved.</p>
 </footer>
 
 <!-- Scripts -->

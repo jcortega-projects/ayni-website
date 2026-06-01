@@ -30,7 +30,6 @@ nav {
   top: 0; left: 0; right: 0;
   z-index: 100;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 1.4rem 2.5rem;
   background: rgba(27, 42, 74, 0);
@@ -53,6 +52,7 @@ nav .nav-links {
   display: flex;
   gap: 2.2rem;
   list-style: none;
+  margin-left: auto;
 }
 nav .nav-links a {
   color: var(--cream);
@@ -65,6 +65,31 @@ nav .nav-links a {
   transition: opacity 0.25s, color 0.25s;
 }
 nav .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+/* ---------- LANGUAGE TOGGLE ---------- */
+.lang-toggle {
+  background: none;
+  border: 1px solid rgba(200,148,62,0.5);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  margin-left: 1.8rem;
+}
+.lang-toggle:hover {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+.lang-toggle.active {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; }
 .nav-toggle span { display: block; width: 26px; height: 2px; background: var(--cream); margin: 5px 0; transition: 0.3s; }
 
@@ -466,6 +491,10 @@ footer .copyright {
     transition: right 0.4s ease;
   }
   nav .nav-links.open { right: 0; }
+  .lang-toggle {
+    margin-left: auto;
+    margin-right: 1rem;
+  }
   .nav-toggle { display: block; z-index: 101; }
 
   .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
